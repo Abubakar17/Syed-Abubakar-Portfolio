@@ -16,3 +16,6 @@ npm run build
 ```
 
 The site uses Vite, React, and hash-based routing for GitHub Pages compatibility.
+
+https://abubakar17.github.io/Syed-Abubakar-Portfolio/
+
