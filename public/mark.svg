@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Syed Muhammad Abubakar">
+  <defs>
+    <linearGradient id="bg" x1="10" y1="6" x2="54" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#101827"/>
+      <stop offset="1" stop-color="#030407"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="15" y1="13" x2="51" y2="51" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8fc2ff"/>
+      <stop offset=".55" stop-color="#6aa8ff"/>
+      <stop offset="1" stop-color="#6df0c2"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+  <path d="M13 22.5C13 16.7 17.7 12 23.5 12H41c5.5 0 10 4.5 10 10v20.5C51 48.3 46.3 53 40.5 53h-17C17.7 53 13 48.3 13 42.5v-20Z" fill="none" stroke="url(#accent)" stroke-width="2.4"/>
+  <path d="M22 41V23h6.2l4 11.3L36.4 23H42v18h-4.2V29.7L33.7 41h-3.2l-4.2-11.2V41H22Z" fill="#f7f8fb"/>
+  <path d="M17 31h8M42 31h6M32 12v7M32 45v8" stroke="url(#accent)" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="17" cy="31" r="2.5" fill="#6aa8ff"/>
+  <circle cx="48" cy="31" r="2.5" fill="#6df0c2"/>
+  <circle cx="32" cy="12" r="2.5" fill="#8fc2ff"/>
+  <circle cx="32" cy="53" r="2.5" fill="#6df0c2"/>
+</svg>
