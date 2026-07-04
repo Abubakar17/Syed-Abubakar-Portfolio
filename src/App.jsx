@@ -52,6 +52,7 @@ const typingWords = [
   "ML systems.",
   "optimization and control.",
   "simulation-ready engineering.",
+  "systems that don't page anyone at 3 a.m.",
 ];
 
 const projects = [
@@ -225,6 +226,8 @@ const terminalLines = [
   "$ focus --systems ml control simulation",
   "Building models that survive contact with real data.",
   "Optimizing for clarity, latency, reliability, and measurable impact.",
+  "$ history | grep cities",
+  "Islamabad → Tokyo → Baudour",
 ];
 
 function useScrollReveal() {
@@ -252,20 +255,32 @@ function useScrollReveal() {
 function useTyping(words) {
   const [wordIndex, setWordIndex] = useState(0);
   const [text, setText] = useState("");
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     const word = words[wordIndex % words.length];
-    if (text.length < word.length) {
+
+    if (!deleting && text.length < word.length) {
       const timeout = setTimeout(() => setText(word.slice(0, text.length + 1)), 55);
       return () => clearTimeout(timeout);
     }
 
+    if (!deleting) {
+      const timeout = setTimeout(() => setDeleting(true), 1800);
+      return () => clearTimeout(timeout);
+    }
+
+    if (text.length > 0) {
+      const timeout = setTimeout(() => setText(text.slice(0, -1)), 26);
+      return () => clearTimeout(timeout);
+    }
+
     const timeout = setTimeout(() => {
-      setText("");
+      setDeleting(false);
       setWordIndex((index) => index + 1);
-    }, 1800);
+    }, 260);
     return () => clearTimeout(timeout);
-  }, [text, wordIndex, words]);
+  }, [text, deleting, wordIndex, words]);
 
   return text;
 }
@@ -275,21 +290,23 @@ function Layout() {
   useScrollReveal();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo(0, 0);
   }, [location.pathname]);
 
   return (
     <div className="site-shell">
       <Header />
       <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/experience" element={<Experience />} />
-          <Route path="/achievements" element={<Achievements />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+        <div className="route-view" key={location.pathname}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/experience" element={<Experience />} />
+            <Route path="/achievements" element={<Achievements />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </div>
       </main>
       <Footer />
     </div>
@@ -342,7 +359,7 @@ function Home() {
 
   return (
     <>
-      <section className="hero page-section" data-reveal>
+      <section className="hero page-section">
         <div className="hero-inner">
           <div className="hero-content">
             <p className="eyebrow">Incoming Data Center Technician Intern @ Google Belgium, Summer 2026</p>
@@ -381,8 +398,13 @@ function Home() {
       </section>
 
       <section className="highlight-grid" aria-label="Key highlights">
-        {highlights.map((item) => (
-          <article className="highlight-card" data-reveal key={item.label}>
+        {highlights.map((item, index) => (
+          <article
+            className="highlight-card"
+            data-reveal
+            style={{ "--reveal-delay": `${index * 90}ms` }}
+            key={item.label}
+          >
             <p>{item.label}</p>
             <h2>{item.value}</h2>
             <span>{item.detail}</span>
@@ -467,9 +489,13 @@ function Projects() {
           ))}
         </div>
       </div>
-      <div className="project-grid">
-        {visibleProjects.map((project) => (
-          <article className="project-card" key={project.title}>
+      <div className="project-grid" key={active}>
+        {visibleProjects.map((project, index) => (
+          <article
+            className="project-card"
+            style={{ "--stagger": `${index * 80}ms` }}
+            key={project.title}
+          >
             <div className="project-topline">
               <span>{project.category}</span>
               <a href={project.link} target="_blank" rel="noreferrer" aria-label={`${project.title} repository`}>
@@ -507,8 +533,13 @@ function Experience() {
       <p className="eyebrow">Experience</p>
       <h1>Impact across ML engineering, research, embedded systems, and cloud.</h1>
       <div className="timeline">
-        {experiences.map((item) => (
-          <article className="timeline-item" key={`${item.company}-${item.role}`}>
+        {experiences.map((item, index) => (
+          <article
+            className="timeline-item"
+            data-reveal
+            style={{ "--reveal-delay": `${Math.min(index, 2) * 70}ms` }}
+            key={`${item.company}-${item.role}`}
+          >
             <div className="timeline-meta">
               <span>{item.period}</span>
               <small>{item.location}</small>
@@ -539,8 +570,13 @@ function Achievements() {
         </div>
       </div>
       <div className="achievement-grid">
-        {achievements.map((item) => (
-          <article className="achievement-card" key={`${item.title}-${item.year}`}>
+        {achievements.map((item, index) => (
+          <article
+            className="achievement-card"
+            data-reveal
+            style={{ "--reveal-delay": `${(index % 2) * 90}ms` }}
+            key={`${item.title}-${item.year}`}
+          >
             <span>{item.type}</span>
             <h2>{item.title}</h2>
             <p className="achievement-org">{item.organization}</p>
@@ -586,15 +622,27 @@ function Contact() {
       <p className="eyebrow">Contact</p>
       <h1>Open to high-impact software, ML systems, and applied research conversations.</h1>
       <div className="contact-grid">
-        <a href={`mailto:${profile.email}`}>
+        <a href={`mailto:${profile.email}`} data-reveal style={{ "--reveal-delay": "0ms" }}>
           <span>Email</span>
           {profile.email}
         </a>
-        <a href={profile.linkedin} target="_blank" rel="noreferrer">
+        <a
+          href={profile.linkedin}
+          target="_blank"
+          rel="noreferrer"
+          data-reveal
+          style={{ "--reveal-delay": "90ms" }}
+        >
           <span>LinkedIn</span>
           /in/s-m-abubakar
         </a>
-        <a href={profile.github} target="_blank" rel="noreferrer">
+        <a
+          href={profile.github}
+          target="_blank"
+          rel="noreferrer"
+          data-reveal
+          style={{ "--reveal-delay": "180ms" }}
+        >
           <span>GitHub</span>
           github.com/Abubakar17
         </a>
@@ -605,7 +653,7 @@ function Contact() {
 
 function Terminal() {
   return (
-    <section className="terminal" data-reveal aria-label="Engineering terminal">
+    <section className="terminal reveal-clip" data-reveal aria-label="Engineering terminal">
       <div className="terminal-chrome">
         <span />
         <span />

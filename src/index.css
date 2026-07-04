@@ -16,6 +16,8 @@
   --accent-strong: #8fc2ff;
   --accent-muted: rgba(106, 168, 255, 0.14);
   --max: 1120px;
+  --ease: cubic-bezier(0.52, 0.01, 0, 1);
+  --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 
 :root[data-theme="light"] {
@@ -136,7 +138,7 @@ button {
   padding: 9px 13px;
   color: var(--muted);
   font-size: 13px;
-  transition: background 180ms ease, color 180ms ease;
+  transition: background 240ms var(--ease), color 240ms var(--ease);
 }
 
 .theme-toggle {
@@ -147,7 +149,7 @@ button {
   background: rgba(255, 255, 255, 0.04);
   color: var(--text);
   cursor: pointer;
-  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+  transition: transform 240ms var(--ease), border-color 240ms var(--ease), background 240ms var(--ease);
 }
 
 .theme-toggle:hover {
@@ -180,7 +182,7 @@ button {
 }
 
 .page-section {
-  padding: 92px 0 64px;
+  padding: 120px 0 96px;
 }
 
 .page-section.narrow {
@@ -213,6 +215,22 @@ button {
   text-transform: uppercase;
 }
 
+.eyebrow::before {
+  margin-right: 0.5em;
+  content: "{";
+  color: var(--accent);
+  font-weight: 400;
+  opacity: 0.75;
+}
+
+.eyebrow::after {
+  margin-left: 0.5em;
+  content: "}";
+  color: var(--accent);
+  font-weight: 400;
+  opacity: 0.75;
+}
+
 h1,
 h2,
 p {
@@ -220,11 +238,12 @@ p {
 }
 
 h1 {
-  max-width: 930px;
+  max-width: 100%;
   margin-bottom: 22px;
   color: var(--text);
-  font-size: clamp(44px, 8vw, 92px);
+  font-size: clamp(48px, 9vw, 120px);
   font-weight: 760;
+  letter-spacing: -0.02em;
   line-height: 0.98;
 }
 
@@ -302,7 +321,7 @@ h2 {
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  transition: transform 700ms ease;
+  transition: transform 700ms var(--ease);
   transition-delay: 0s;
 }
 
@@ -374,7 +393,7 @@ h2 {
   background: rgba(255, 255, 255, 0.04);
   color: var(--text);
   cursor: pointer;
-  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+  transition: transform 240ms var(--ease), border-color 240ms var(--ease), background 240ms var(--ease);
 }
 
 .button {
@@ -432,7 +451,7 @@ h2 {
 
 .highlight-card {
   padding: 24px;
-  transition: transform 180ms ease, border-color 180ms ease;
+  transition: transform 240ms var(--ease), border-color 240ms var(--ease);
 }
 
 .highlight-card p,
@@ -570,7 +589,9 @@ h2 {
   min-height: 100%;
   flex-direction: column;
   padding: 24px;
-  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+  animation: rise-in 640ms var(--ease) both;
+  animation-delay: var(--stagger, 0ms);
+  transition: transform 240ms var(--ease), border-color 240ms var(--ease), background 240ms var(--ease);
 }
 
 .project-topline {
@@ -622,7 +643,12 @@ h2 {
   border-radius: 999px;
   padding: 7px 10px;
   color: #c5d9f7;
+  font-family: var(--mono);
   font-size: 12px;
+}
+
+:root[data-theme="light"] .tag-row span {
+  color: #2f568f;
 }
 
 .timeline {
@@ -786,7 +812,7 @@ h2 {
   padding: 22px;
   color: var(--text);
   overflow-wrap: anywhere;
-  transition: border-color 180ms ease, transform 180ms ease;
+  transition: border-color 240ms var(--ease), transform 240ms var(--ease);
 }
 
 .contact-grid a:hover {
@@ -815,19 +841,109 @@ h2 {
   gap: 18px;
 }
 
+.footer a {
+  transition: color 240ms var(--ease);
+}
+
 .footer a:hover {
   color: var(--accent-strong);
 }
 
 [data-reveal] {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 560ms ease, transform 560ms ease;
+  transform: translateY(26px);
+  transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
 }
 
 [data-reveal].is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Terminal: clip-path iris reveal instead of the default rise */
+[data-reveal].reveal-clip {
+  clip-path: inset(16% 9% 16% 9% round 16px);
+  transform: scale(0.985);
+  transition:
+    opacity 640ms var(--ease),
+    transform 1000ms var(--ease),
+    clip-path 1000ms var(--ease);
+}
+
+[data-reveal].reveal-clip.is-visible {
+  clip-path: inset(0 0 0 0 round 8px);
+  transform: none;
+}
+
+/* Route change: each page settles into place with the signature curve */
+.route-view {
+  animation: route-enter 560ms var(--ease) both;
+}
+
+@keyframes route-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero: orchestrated entrance — eyebrow, name, typed line, copy, actions, then portrait */
+.hero-content > * {
+  animation: rise-in 760ms var(--ease) both;
+}
+
+.hero-content > *:nth-child(1) {
+  animation-delay: 40ms;
+}
+
+.hero-content > *:nth-child(2) {
+  animation-delay: 130ms;
+}
+
+.hero-content > *:nth-child(3) {
+  animation-delay: 220ms;
+}
+
+.hero-content > *:nth-child(4) {
+  animation-delay: 310ms;
+}
+
+.hero-content > *:nth-child(5) {
+  animation-delay: 400ms;
+}
+
+.portrait-card {
+  animation: portrait-in 900ms var(--ease) 360ms both;
+}
+
+@keyframes portrait-in {
+  from {
+    opacity: 0;
+    transform: translateY(26px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 @keyframes blink {
@@ -841,7 +957,9 @@ h2 {
   *::before,
   *::after {
     scroll-behavior: auto !important;
+    animation-delay: 0ms !important;
     animation-duration: 1ms !important;
+    transition-delay: 0ms !important;
     transition-duration: 1ms !important;
   }
 }
