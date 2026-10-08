@@ -1,5 +1,5 @@
 import { profile, research } from "../data/content";
-import { Fact, LinkRow, SectionHead, Tags } from "./ui";
+import { Fact, LinkRow, SectionHead } from "./ui";
 
 function Authors({ authors }) {
   if (!Array.isArray(authors)) return <Fact value={authors} />;
@@ -32,7 +32,7 @@ export default function Research() {
         </div>
 
         <div className="research-col" data-reveal>
-          <h3 className="block-label">Manuscripts</h3>
+          <h3 className="block-label">Publications</h3>
           <ol className="papers">
             {research.papers.map((paper, index) => (
               <li key={paper.venue}>
@@ -56,8 +56,6 @@ export default function Research() {
         </div>
       </div>
 
-      <AgenticAL />
-
       <aside className="seeking" data-reveal aria-label="Currently seeking">
         <p>
           <span className="status-dot" aria-hidden="true" />
@@ -68,53 +66,5 @@ export default function Research() {
         </a>
       </aside>
     </section>
-  );
-}
-
-function AgenticAL() {
-  const p = research.aal;
-  return (
-    <article className="aal" id={p.id} aria-labelledby={`${p.id}-title`}>
-      <header className="case-head" data-reveal>
-        <p className="case-kicker">{p.kicker}</p>
-        <h3 id={`${p.id}-title`}>{p.title}</h3>
-      </header>
-
-      <div className="case-brief" data-reveal>
-        <div className="labeled">
-          <h4>Problem</h4>
-          <p>{p.problem}</p>
-        </div>
-        <div className="labeled">
-          <h4>Idea</h4>
-          <p>{p.idea}</p>
-        </div>
-      </div>
-
-      <ol className="chain" aria-label="Agentic active learning loop" data-reveal>
-        {p.pipeline.map((step) => (
-          <li key={step.name}>
-            <strong>{step.name}</strong>
-            <span>{step.note}</span>
-          </li>
-        ))}
-      </ol>
-
-      <div data-reveal>
-        <ul className="results results-4">
-          {p.results.map((r) => (
-            <li key={r.label}>
-              <strong>{r.value}</strong>
-              <span>{r.label}</span>
-              <small>{r.note}</small>
-            </li>
-          ))}
-        </ul>
-        <p className="case-note">{p.note}</p>
-        <div className="aal-foot">
-          <Tags items={p.stack} />
-        </div>
-      </div>
-    </article>
   );
 }

@@ -91,7 +91,7 @@ export default function Pipeline({ stages, initial = "fce" }) {
           {current.novel && <span className="detail-flag">Novel in the paper</span>}
           {current.mine && <span className="detail-flag detail-mine">My focus</span>}
         </p>
-        <h4>{current.name}</h4>
+        <h3>{current.name}</h3>
         <p className="detail-what">{current.what}</p>
         <ul className="detail-list">
           {current.details.map((detail) => (

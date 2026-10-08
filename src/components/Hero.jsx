@@ -1,5 +1,5 @@
 import portrait from "../assets/portrait.webp";
-import { profile, proof } from "../data/content";
+import { employers, profile, proof } from "../data/content";
 import { TextLink } from "./ui";
 
 export default function Hero() {
@@ -15,9 +15,22 @@ export default function Hero() {
             I build perception systems that turn messy sensor data into physical measurements: a fish's
             length from <em>one</em> underwater camera, an object's 6-DoF pose from <em>one</em> 2D LiDAR.
           </p>
+          <div className="employers">
+            <span className="employers-label">Experience at</span>
+            <ul>
+              {employers.map((item) => (
+                <li key={item.name} className={item.strong ? "is-strong" : undefined}>
+                  <a href="#experience" title={item.role}>
+                    <strong>{item.name}</strong>
+                    {item.strong && <span>{item.role}</span>}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
           <p className="hero-sub">
-            ML engineer with a year in industry, two research manuscripts (one as lead author), and an Erasmus
-            Mundus master's now at the University of Genoa. Currently seeking a <strong>master's thesis internship</strong> in ML / computer vision.
+            Erasmus Mundus scholar at the University of Genoa, seeking a{" "}
+            <strong>master's thesis internship</strong> in ML / computer vision.
           </p>
 
           <div className="hero-actions">
@@ -66,7 +79,7 @@ export default function Hero() {
 
       <ul className="proof" aria-label="Highlights">
         {proof.map((item) => (
-          <li key={item.value}>
+          <li key={item.value} className={item.highlight ? "is-highlight" : undefined}>
             <a href={item.href}>
               <strong>{item.value}</strong>
               <span>{item.label}</span>

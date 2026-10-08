@@ -6,24 +6,34 @@ export default function Experience() {
     <section className="section" id="experience" aria-labelledby="experience-title">
       <SectionHead id="experience-title" index="03" eyebrow="Experience" title="Industry, labs, infrastructure." />
 
+      {/* One scannable line per role; the full bullets open on demand. */}
       <ol className="roles">
         {experience.map((job) => (
-          <li className="role" key={`${job.org}-${job.role}`} data-reveal>
-            <div className="role-meta">
-              <span className="role-period">{job.period}</span>
-              <span className="role-place">{job.place}</span>
-            </div>
-            <div className="role-body">
-              <h3>
-                {job.role} <span className="role-org">· {job.org}</span>
-              </h3>
-              <ul className="role-points">
-                {job.points.map((point) => (
-                  <li key={point}>{point}</li>
-                ))}
-              </ul>
-              <Tags items={job.tags} />
-            </div>
+          <li key={`${job.org}-${job.role}`} data-reveal>
+            <details className="role">
+              <summary>
+                <span className="role-meta">
+                  <span className="role-period">{job.period}</span>
+                  <span className="role-place">{job.place}</span>
+                </span>
+                <span className="role-main">
+                  <h3>
+                    <span className="role-org">{job.org}</span>
+                    <span className="role-title">{job.role}</span>
+                  </h3>
+                  <span className="role-summary">{job.summary}</span>
+                </span>
+                <span className="role-toggle" aria-hidden="true" />
+              </summary>
+              <div className="role-detail">
+                <ul className="role-points">
+                  {job.points.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+                <Tags items={job.tags} />
+              </div>
+            </details>
           </li>
         ))}
       </ol>

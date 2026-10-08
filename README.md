@@ -16,6 +16,6 @@ npm run preview  # serve the build
 ## Where things live
 
 - `src/data/content.js` — every fact on the site. Edit text here, not in components. `TODO("...")` values render as visible placeholders.
-- `src/components/` — one file per section; `Pipeline.jsx` is the interactive DeepDive diagram.
+- `src/components/` — one file per home section; `Cases.jsx` holds the case-study pages (`#/deepdive`, `#/aal`, `#/lidar`), and `Pipeline.jsx` is the interactive DeepDive diagram.
 - `src/index.css` — tokens and styles. Design rules and decision log: `DESIGN.md`.
 - `public/` — CV PDF, favicon, Open Graph image, self-hosted Inter font.

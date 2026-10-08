@@ -33,6 +33,22 @@ export function Tags({ items, label = "Technologies" }) {
 
 const isExternal = (href) => /^https?:/.test(href);
 
+export function ArrowRight() {
+  return (
+    <svg className="arrow" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true" focusable="false">
+      <path d="M1.5 6h9M7 2.5 10.5 6 7 9.5" fill="none" stroke="currentColor" strokeWidth="1.4" />
+    </svg>
+  );
+}
+
+export function ArrowLeft() {
+  return (
+    <svg className="arrow" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true" focusable="false">
+      <path d="M10.5 6h-9M5 2.5 1.5 6 5 9.5" fill="none" stroke="currentColor" strokeWidth="1.4" />
+    </svg>
+  );
+}
+
 export function ArrowUpRight() {
   return (
     <svg className="arrow" viewBox="0 0 12 12" width="10" height="10" aria-hidden="true" focusable="false">

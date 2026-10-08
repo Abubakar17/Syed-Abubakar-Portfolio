@@ -28,17 +28,20 @@ export const nav = [
   { id: "contact", label: "Contact" },
 ];
 
-// Hero proof line: each item is a verifiable fact with its context attached.
+// Employer line in the hero; `strong` gets the most visual weight.
+export const employers = [
+  { name: "Google", role: "Data Center Technician Intern, 2026", strong: true },
+  { name: "Dcube Technologies", role: "Machine Learning Engineer, 2024–25" },
+  { name: "ARS Corp. · METI Japan", role: "AI/IT Intern, 2024" },
+];
+
+// Credential strip under the hero. Project results live on the project cards instead.
 export const proof = [
   {
-    value: "97.5% F1",
-    label: "fish detection on LifeCLEF 2015, above the 95.4% prior best",
-    href: "#deepdive",
-  },
-  {
-    value: "2.0 mm · 0.68°",
-    label: "6-DoF pose error from a single 2D LiDAR, on a Jetson",
-    href: "#lidar-pose",
+    value: "Google",
+    label: "Data Center Technician Intern · Belgium · Summer 2026",
+    href: "#experience",
+    highlight: true,
   },
   {
     value: "2 manuscripts",
@@ -46,9 +49,48 @@ export const proof = [
     href: "#research",
   },
   {
-    value: "Google",
-    label: "Data Center Technician Intern, Belgium, 2026",
+    value: "Erasmus Mundus",
+    label: "fully funded scholar, European Master in Sustainable Systems Engineering",
+    href: "#education",
+  },
+  {
+    value: "METI Japan",
+    label: "only Pakistani selected from 15,000 applicants for the AI/IT internship",
     href: "#experience",
+  },
+];
+
+// Project cards on the home page; each opens its case-study page at #/<route>.
+export const caseCards = [
+  {
+    route: "deepdive",
+    kicker: "Flagship · Computer vision research",
+    title: "DeepDive: fish biomass from one underwater camera",
+    metric: "97.5%",
+    metricLabel: "detection F1 on LifeCLEF 2015",
+    summary: "Detect, track and measure fish in monocular reef video, then estimate biomass per species.",
+    role: "Depth stage · co-author",
+    chain: ["video", "FCE + YOLOv8", "tracking", "depth", "length → mass"],
+  },
+  {
+    route: "aal",
+    kicker: "Lead author · Medical imaging",
+    title: "Agentic Active Learning for dental X-rays",
+    metric: "20–30%",
+    metricLabel: "less labelled data for full-data performance",
+    summary: "A vision-language agent describes each X-ray; text and image features decide what a dentist labels next.",
+    role: "Lead author · MICCAI 2025 submission",
+    chain: ["X-ray", "Qwen2-VL text", "YOLOv11 features", "core-set", "dentist"],
+  },
+  {
+    route: "lidar",
+    kicker: "Robotics perception",
+    title: "6-DoF object pose from a single 2D LiDAR",
+    metric: "2.0 mm · 0.68°",
+    metricLabel: "mean position / angular error",
+    summary: "A conveyor turns a 2D LiDAR into a 3D scanner; a 28 KB network regresses pose on a Jetson.",
+    role: "ML model + Jetson deployment",
+    chain: ["2D LiDAR", "15 slices", "MLP", "ONNX on Jetson"],
   },
 ];
 
@@ -60,6 +102,7 @@ const fishRepo = "https://github.com/Abubakar17/FYP-reports-Fish-Biomass-Estimat
 
 export const deepdive = {
   id: "deepdive",
+  route: "deepdive",
   kicker: "Flagship · Research",
   title: "DeepDive: fish biomass from a single underwater camera",
   meta: [
@@ -231,6 +274,7 @@ export const deepdive = {
 
 export const lidar = {
   id: "lidar-pose",
+  route: "lidar",
   kicker: "Featured · Robotics perception",
   title: "6-DoF object pose from a single 2D LiDAR",
   meta: ["Master's team project (5), UTC Compiègne", "Sep 2025 – Jan 2026"],
@@ -336,7 +380,7 @@ export const research = {
       year: "2025",
       summary:
         "Vision-language agents describe each X-ray in text; those descriptions are fused with image features to choose which X-rays a dentist labels next. Matches a fully supervised detector with 20–30% less labelled data.",
-      links: [{ label: "Method & results", href: "#aal" }],
+      links: [{ label: "Method & results", href: "#/aal" }],
     },
     {
       authors: ["U. Jalil", "S. M. Abubakar", "M. Saad", "A. Salman"],
@@ -348,15 +392,19 @@ export const research = {
         "Hierarchical FCE + YOLOv8 detection, Hungarian tracking and attention U-Net depth for species-level biomass from monocular video. 97.5% detection F1 on LifeCLEF 2015.",
       links: [
         { label: "PDF", href: `${fishRepo}/blob/main/ICESJMS_2024a_compressed.pdf` },
-        { label: "Case study", href: "#deepdive" },
+        { label: "Case study", href: "#/deepdive" },
       ],
     },
   ],
   // Agentic Active Learning manuscript (MICCAI 2025 submission).
   aal: {
     id: "aal",
-    kicker: "Lead-author research",
+    route: "aal",
+    kicker: "Lead-author research · Medical imaging",
     title: "Agentic Active Learning for dental X-rays",
+    meta: ["MICCAI 2025 submission", "2025", "Lead author"],
+    contribution:
+      "Lead author. I led the work end to end under the supervision of university professors: agent prompting, text–image embedding fusion, the combined core-set query, and the 30-experiment evaluation.",
     problem:
       "Labelling dental X-rays needs a dentist's time. Standard active learning chooses what to label from low-level image features alone, which miss context a clinician would notice (crowns, fillings, missing teeth).",
     idea:
@@ -391,6 +439,7 @@ export const research = {
 export const experience = [
   {
     org: "Google",
+    summary: "Hardware diagnosis and repair, fibre fault tracing and secure decommissioning across five data center domains.",
     role: "Data Center Technician Intern",
     period: "Jun – Sep 2026",
     place: "Belgium",
@@ -403,6 +452,7 @@ export const experience = [
   },
   {
     org: "Dcube Technologies",
+    summary: "Shipped GAN audio enhancement for NFL broadcasts (96% recall), LLM features and Dockerised model services; led the MICCAI paper.",
     role: "Machine Learning Engineer",
     period: "Aug 2024 – Jul 2025",
     place: "Islamabad",
@@ -416,6 +466,7 @@ export const experience = [
   },
   {
     org: "ARS Corporation · METI AI/IT programme",
+    summary: "Serverless monitoring on AWS SAM and edge data pipelines on Raspberry Pi / Armadillo, with 99.9% remote uptime.",
     role: "AI/IT Intern",
     period: "Nov – Dec 2024",
     place: "Tokyo",
@@ -428,6 +479,7 @@ export const experience = [
   },
   {
     org: "OPTIMAL Lab, NUST",
+    summary: "DeepDive fish biomass with UWA's Machine Vision Group; I worked on monocular depth.",
     role: "Undergraduate Research Assistant",
     period: "Jun 2023 – Jun 2024",
     place: "Islamabad",
@@ -439,6 +491,7 @@ export const experience = [
   },
   {
     org: "TUKL-NUST R&D Center",
+    summary: "Table-structure recognition (95.9% precision), EEG anomaly detection and a face-recognition entry system.",
     role: "Undergraduate Research Intern",
     period: "Jun 2021 – Sep 2022",
     place: "Islamabad",

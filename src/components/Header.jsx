@@ -4,8 +4,8 @@ import { useActiveSection, useTheme } from "../hooks";
 
 const sectionIds = nav.map((item) => item.id);
 
-export default function Header() {
-  const active = useActiveSection(sectionIds);
+export default function Header({ route }) {
+  const active = useActiveSection(sectionIds, route);
   const [theme, toggleTheme] = useTheme();
   const [open, setOpen] = useState(false);
   const nextTheme = theme === "dark" ? "light" : "dark";
@@ -46,7 +46,7 @@ export default function Header() {
               <li key={item.id}>
                 <a
                   href={`#${item.id}`}
-                  aria-current={active === item.id ? "true" : undefined}
+                  aria-current={(route ? "work" : active) === item.id ? "true" : undefined}
                   onClick={() => setOpen(false)}
                 >
                   {item.label}
