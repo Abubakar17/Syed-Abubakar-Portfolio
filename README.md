@@ -1,21 +1,21 @@
 # Syed Muhammad Abubakar Portfolio
 
-Premium recruiter-focused portfolio for GitHub Pages.
+Single-page portfolio (React + Vite), deployed to GitHub Pages by `.github/workflows/deploy.yml` on push to `main`.
+
+https://abubakar17.github.io/Syed-Abubakar-Portfolio/
 
 ## Run locally
 
 ```bash
 npm install
-npm run dev
+npm run dev      # development
+npm run build    # production build in dist/
+npm run preview  # serve the build
 ```
 
-## Build
+## Where things live
 
-```bash
-npm run build
-```
-
-The site uses Vite, React, and hash-based routing for GitHub Pages compatibility.
-
-https://abubakar17.github.io/Syed-Abubakar-Portfolio/
-
+- `src/data/content.js` — every fact on the site. Edit text here, not in components. `TODO("...")` values render as visible placeholders.
+- `src/components/` — one file per section; `Pipeline.jsx` is the interactive DeepDive diagram.
+- `src/index.css` — tokens and styles. Design rules and decision log: `DESIGN.md`.
+- `public/` — CV PDF, favicon, Open Graph image, self-hosted Inter font.

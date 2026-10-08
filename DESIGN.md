@@ -37,12 +37,11 @@
 | Hairline Strong | `rgba(255,255,255,0.18)` | `--line-strong` | Emphasized borders — buttons, portrait frame, active states |
 | Text | `#f7f8fb` | `--text` | Primary text, headings |
 | Muted | `#a7afbd` | `--muted` | Secondary text, body copy, card descriptions |
-| Soft | `#687385` | `--soft` | Tertiary text, timestamps, terminal chrome dots |
+| Soft | `#8a94a6` | `--soft` | Tertiary text, labels, timestamps (raised from `#687385` for AA contrast, Decision #22) |
 | Accent | `#6aa8ff` | `--accent` | The one chromatic colour — cursor blink, links, active glow |
 | Accent Strong | `#8fc2ff` | `--accent-strong` | Brighter accent — eyebrows, icon fills, hover states |
 | Accent Muted | `rgba(106,168,255,0.14)` | `--accent-muted` | Wash background for primary buttons, badges, active filters |
-| Terminal Blue | `#d7e8ff` | *(inline, `.terminal-body`)* | Monospace terminal text — brighter than muted for code readability |
-| Tag Blue | `#c5d9f7` | *(inline, `.tag-row span`)* | Tag/pill text inside outlined badges |
+| Tag Blue | `#c5d9f7` | `--tag-text` | Mono tag text, pipeline detail lists |
 | Button Primary Text | `#dcecff` | *(inline, `.button.primary`)* | Text on the primary/active button state |
 
 ### Light (`data-theme="light"`)
@@ -56,7 +55,7 @@
 | Hairline Strong | `rgba(12,18,28,0.18)` | `--line-strong` |
 | Text | `#101722` | `--text` |
 | Muted | `#536173` | `--muted` |
-| Soft | `#7b8796` | `--soft` |
+| Soft | `#5f6b7a` | `--soft` |
 | Accent | `#246bfe` | `--accent` |
 | Accent Strong | `#064ed6` | `--accent-strong` |
 | Accent Muted | `rgba(36,107,254,0.10)` | `--accent-muted` |
@@ -69,6 +68,7 @@
 *(Source: `src/index.css` — Inter for UI/body, system monospace for the terminal motif)*
 
 ### Inter — primary typeface, all UI and body
+- **Loading:** self-hosted variable woff2, Latin subset (`public/fonts/inter-latin.woff2`, 48 KB), preloaded, `font-display: swap`. Before Decision #23 the font was declared but never loaded.
 - **Stack:** `Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`
 - **Weights:** 400 (body), 650–760 (headings — Inter's variable axis, not a flat 700)
 - **Role:** Every heading, paragraph, nav item, and button. No secondary display face — scale and weight carry hierarchy, matching Vivid+Co and Hyperstudio's single-typeface discipline.
@@ -130,7 +130,7 @@ None of the references' colours or fonts are imported; only their structural and
 
 1. **Hairline-as-structure** *(Hyperstudio, GSAP, ORYZO)* — 1px `--line` borders are *the* structural device. Section transitions are hairlines, never background-colour shifts. "The line IS the layout."
 2. **Oversized, confident type** *(Vivid+Co, Resend, GSAP)* — authority through scale, not boldness or colour. Weight-760 Inter at 120px says more than any decoration.
-3. **One signature moment, quiet everywhere else** *(universal)* — the flip-portrait card (photo front / initials back, 3D hover flip) is this site's one "loud" element. No reference has an equivalent. Everything else — buttons, cards, nav — stays deliberately restrained around it.
+3. **One signature moment, quiet everywhere else** *(universal)* — the interactive DeepDive pipeline diagram is this site's one "loud" element (Decision #20; previously the flip-portrait card). Everything else — buttons, rows, nav — stays deliberately restrained around it.
 4. **Ghost-first buttons** *(all five references)* — no solid-fill CTA exists in any reference. `.button` already uses a translucent wash; this is locked as a Don't.
 5. **Terminal motif as identity** *(Resend)* — the monospace terminal window reads "engineer," not just "designer." Keep it, extend it to tech tags.
 6. **Section eyebrows as wayfinding** *(GSAP's `{ }` device)* — the existing `.eyebrow` class may adopt a light typographic bracket treatment (`{ Experience }`) as a nod to GSAP without copying its colour taxonomy.
@@ -144,8 +144,11 @@ None of the references' colours or fonts are imported; only their structural and
 ### Sticky Pill Navigation
 Blurred, semi-transparent pill bar (999px radius), hairline border, 5px internal padding, 13px links. Already a step beyond Hyperstudio's floating hairline nav — keep as-is.
 
-### Flip Portrait Card — **the signature element**
-3D flip on hover (700ms, 10s return delay), photo front / initials-on-gradient back, hairline frame offset −18px with an accent corner bracket. The page's one bold risk. **Refinement:** swap the generic `700ms ease` for the signature curve `cubic-bezier(0.52, 0.01, 0, 1)` (§8).
+### Pipeline Diagram — **the signature element** (`src/components/Pipeline.jsx`)
+5-column × 3-lane grid of node buttons over a stretched SVG of 1px elbow connectors (`vector-effect: non-scaling-stroke`). Selecting a node lights its in/out edges in `--accent` and fills a detail panel (what / key details in mono / why). Arrow keys move between stages. Below 820px it collapses to a vertical stepper with the same buttons and no SVG. No ambient animation — it only changes on input.
+
+### Portrait (replaces the flip card)
+Plain photo in a hairline frame with a static, corner-bracket "detection box" and a mono `id 01 · conf 0.99` label — a quiet nod to the work. No flip, no back face.
 
 ### Ghost Button (primary + secondary)
 8px radius, translucent wash `rgba(255,255,255,0.04)`, hairline-strong border; primary variant swaps to `--accent-muted` background + accent border + `#dcecff` text. **Never filled solid.**
@@ -153,8 +156,8 @@ Blurred, semi-transparent pill bar (999px radius), hairline border, 5px internal
 ### Glass Card Family (highlight / project / achievement / submission / timeline)
 Shared language: 8px radius, `--line` border, white gradient wash (`0.055` → `0.025`). Unified across every card on the site — a real strength; keep unified.
 
-### Terminal Window
-macOS chrome dots (`--soft`, 999px), monospace body in `#d7e8ff`, hairline divider under the chrome bar. Expand the motif to tech tags (below).
+### Terminal Window — removed (Decision #21)
+The monospace identity now lives in tags, stage numbers, metrics and the pipeline detail list instead of a decorative terminal.
 
 ### Tag Pill
 999px radius, hairline border, `#c5d9f7` at 12px. **Refinement (Decision #7):** render tag text in the monospace stack — "these are technologies, not marketing labels."
@@ -247,3 +250,11 @@ One named curve, everywhere: **`cubic-bezier(0.52, 0.01, 0, 1)`** — slow start
 | 16 | Decision #12's Lenis/framer-motion adoption re-scoped to a dependency-free implementation: the clip-path reveal is CSS-transition-driven (IntersectionObserver-triggered) instead of scroll-linked, and smooth scrolling stays native CSS | Same visual effect, zero new dependencies, zero bundle growth — the ~40kb cost in #12 was only acceptable *if* needed, and it wasn't |
 | 17 | Route-change scroll reset switched from `behavior: "smooth"` to instant | A smooth multi-hundred-pixel scroll fights the new route-enter transition; the page transition is now the only motion on navigation |
 | 18 | Reduced-motion guard extended to zero out animation/transition *delays*, not just durations | Staggered delays would otherwise leave content invisible for up to ~0.5s for reduced-motion users |
+| 19 | **Structure: one scrolling page** (Hero → Work → Research → Experience → About → Contact) with a sticky anchor nav; `react-router-dom` removed. Supersedes #1 | A recruiter should reach everything in one scroll; hash routes (`#/projects`) were not indexable and cost 5 clicks |
+| 20 | Signature element moves from the flip portrait to the interactive DeepDive pipeline | The loud moment should demonstrate technical depth, not decoration; the portrait's back face (social handle) undercut credibility for academic readers |
+| 21 | Removed: typing loop, blinking cursor, terminal block, project filters, highlight cards, focus list | Constant or decorative motion and filler text; their useful content moved into the hero proof line and case studies |
+| 22 | `--soft` raised to `#8a94a6` (dark) / `#5f6b7a` (light); light-mode blue text uses `--accent-strong` via `--accent-text` | Previous values measured 4.2:1 and 3.5:1 — below WCAG AA for small text |
+| 23 | Inter self-hosted and preloaded; Tailwind/PostCSS removed | The declared typeface was never loaded; Tailwind was unused template residue |
+| 24 | Favicon recoloured to the single blue accent | The previous mark used a green second hue, violating the one-accent rule |
+| 25 | Case studies are open, hairline-structured sections — not cards; results get a ranked dot plot (axis from 0.70, all values printed) | Cards flatten hierarchy; a dot plot is honest with a truncated axis where bars are not |
+| 26 | Facts sourced from the DeepDive manuscript and the lidar_pose_estimation repo override the CV where they differ; unknown items render as dashed `[To confirm]` placeholders | The site must not claim methods (SAM, ICP/RANSAC, TensorRT) the published artefacts don't show |

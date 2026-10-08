@@ -1,17 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="%BASE_URL%mark.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Syed Muhammad Abubakar · ML & Computer Vision Engineer</title>
     <meta
       name="description"
-      content="Syed Muhammad Abubakar is an Erasmus Mundus Scholar, incoming Google Data Center Technician Intern, and machine learning systems engineer focused on ML, infrastructure, control, simulation, and real-world modeling."
+      content="Syed Muhammad Abubakar builds perception systems: fish biomass from monocular underwater video (97.5% detection F1), 6-DoF pose from a 2D LiDAR on Jetson. ML engineer, Erasmus Mundus scholar, seeking a master's thesis internship in ML / computer vision."
     />
-    <title>Syed Muhammad Abubakar | ML Systems Engineer</title>
+    <meta name="author" content="Syed Muhammad Abubakar" />
+    <link rel="canonical" href="https://abubakar17.github.io/Syed-Abubakar-Portfolio/" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#050608" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Syed Muhammad Abubakar" />
+    <meta property="og:title" content="Syed Muhammad Abubakar · ML & Computer Vision Engineer" />
+    <meta
+      property="og:description"
+      content="Perception systems that turn messy sensor data into physical measurements. Case studies, research manuscripts and experience."
+    />
+    <meta property="og:url" content="https://abubakar17.github.io/Syed-Abubakar-Portfolio/" />
+    <meta property="og:image" content="https://abubakar17.github.io/Syed-Abubakar-Portfolio/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Syed Muhammad Abubakar, ML and computer vision engineer" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" type="image/svg+xml" href="/mark.svg" />
+    <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+    <script>
+      // Apply the saved theme before first paint to avoid a flash.
+      try {
+        var t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Syed Muhammad Abubakar",
+        "jobTitle": "Machine Learning & Computer Vision Engineer",
+        "url": "https://abubakar17.github.io/Syed-Abubakar-Portfolio/",
+        "email": "mailto:syedabubakar03@yahoo.com",
+        "sameAs": ["https://github.com/Abubakar17", "https://www.linkedin.com/in/s-m-abubakar/"],
+        "alumniOf": [
+          { "@type": "CollegeOrUniversity", "name": "National University of Sciences and Technology (NUST)" }
+        ],
+        "affiliation": { "@type": "CollegeOrUniversity", "name": "University of Genoa" },
+        "knowsAbout": [
+          "Computer vision",
+          "Machine learning",
+          "Object detection",
+          "Multi-object tracking",
+          "Monocular depth estimation",
+          "LiDAR pose estimation",
+          "Active learning"
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <p style="padding: 24px; font-family: system-ui, sans-serif">
+        Syed Muhammad Abubakar, ML &amp; computer vision engineer. This site needs JavaScript; the
+        <a href="CV_SyedMuhammadAbubakar.pdf">CV (PDF)</a> and
+        <a href="https://github.com/Abubakar17">GitHub</a> work without it.
+      </p>
+    </noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
