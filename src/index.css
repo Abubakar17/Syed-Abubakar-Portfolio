@@ -468,7 +468,7 @@ h4.todo {
    ========================================================================== */
 
 .hero {
-  padding: 64px 0 0;
+  padding: 40px 0 0;
 }
 
 .hero-grid {
@@ -479,8 +479,8 @@ h4.todo {
 }
 
 .hero h1 {
-  margin-bottom: 26px;
-  font-size: clamp(42px, 6.6vw, 84px);
+  margin-bottom: 20px;
+  font-size: clamp(42px, 6.4vw, 80px);
   font-weight: 760;
   letter-spacing: -0.03em;
   line-height: 0.98;
@@ -501,7 +501,7 @@ h4.todo {
 
 .hero-sub {
   max-width: 40em;
-  margin-bottom: 34px;
+  margin-bottom: 26px;
   color: var(--muted);
   font-size: 16px;
 }
@@ -592,7 +592,7 @@ h4.todo {
 .proof {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin-top: 56px;
+  margin-top: 40px;
   border-top: 1px solid var(--line);
 }
 
@@ -1333,33 +1333,54 @@ h4.todo {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-.seeking {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px 32px;
-  align-items: center;
-  justify-content: space-between;
-  margin: 48px 0 72px;
-  padding: 24px 28px;
-  border: 1px solid var(--accent-line);
-  border-radius: 8px;
-  background: linear-gradient(90deg, var(--accent-muted), transparent 70%);
-}
-
-.seeking p {
-  max-width: 46em;
-  font-size: 17px;
-}
 
 .status-dot {
   display: inline-block;
+  flex: none;
   width: 8px;
   height: 8px;
-  margin-right: 12px;
   border-radius: 999px;
   background: var(--accent);
   box-shadow: 0 0 0 4px var(--accent-muted);
-  vertical-align: 2px;
+}
+
+/* "Open to" line: the first thing in the hero, links to contact. */
+.status {
+  display: inline-flex;
+  gap: 12px;
+  align-items: baseline;
+  max-width: 100%;
+  margin-bottom: 22px;
+  padding: 9px 16px 9px 14px;
+  border: 1px solid var(--accent-line);
+  border-radius: 8px;
+  background: linear-gradient(90deg, var(--accent-muted), transparent);
+  transition: border-color 180ms var(--ease);
+}
+
+.status:hover {
+  border-color: var(--accent);
+}
+
+.status .status-dot {
+  align-self: center;
+}
+
+.status-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.status-text strong {
+  color: var(--text);
+  font-weight: 650;
+}
+
+.status-text span {
+  color: var(--muted);
 }
 
 /* ==========================================================================
@@ -2025,9 +2046,6 @@ h4.todo {
     grid-column: auto;
   }
 
-  .seeking {
-    padding: 20px;
-  }
 
   .papers > li {
     grid-template-columns: minmax(0, 1fr);

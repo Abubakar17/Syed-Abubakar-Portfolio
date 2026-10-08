@@ -17,7 +17,11 @@ export const profile = {
   github: "https://github.com/Abubakar17",
   linkedin: "https://www.linkedin.com/in/s-m-abubakar/",
   cv: `${base}CV_SyedMuhammadAbubakar.pdf`,
-  seeking: "Master's thesis internship · ML / computer vision engineering",
+  seeking: {
+    headline: "Open to a master's thesis internship",
+    role: "ML / computer vision engineer",
+    focus: "perception · 3D vision · label-efficient learning",
+  },
 };
 
 export const nav = [
@@ -322,12 +326,36 @@ export const lidar = {
 
 export const moreProjects = [
   {
+    title: "JARVIS: voice-driven robot teammate",
+    year: "2025",
+    summary:
+      "AMD Robotics Hackathon, team of 2. An SO-101 arm takes spoken tool requests, releases objects only when it sees an open hand, and switches between LeRobot ACT policies trained on an AMD MI300X cluster; Llama 3.2 runs locally for conversation.",
+    stack: ["LeRobot (ACT)", "SO-101 arm", "Llama 3.2", "AMD MI300X"],
+    href: "https://github.com/Abubakar17/AMD_Robotics_Hackathon_2025_Jarvis",
+  },
+  {
     title: "ChatWithPDFs",
     year: "2024",
     summary:
       "RAG question answering over PDFs, comparing a QA chain, a chat-history variant and a retriever-based variant.",
     stack: ["LangChain", "Gemini API", "FAISS", "Streamlit"],
     href: "https://github.com/Abubakar17/Chat_With_PDFS",
+  },
+  {
+    title: "GroupChat Karaoke",
+    year: "2026",
+    summary:
+      "Aligns a group's separate voice notes to one song and mixes them in turns: Demucs vocal separation, chroma cross-correlation with a DTW fallback, phrase assignment and loudness-matched mixing.",
+    stack: ["Demucs", "librosa", "DTW", "FastAPI"],
+    href: "https://github.com/Abubakar17/karaoke",
+  },
+  {
+    title: "Finger Magic",
+    year: "2026",
+    summary:
+      "Real-time AR in the browser: comic-book shader filters stretched between your two hands, driven by MediaPipe hand landmarks. Pinch to stamp a frame, swipe apart to clear.",
+    stack: ["MediaPipe", "WebGL2", "JavaScript"],
+    href: "https://github.com/Abubakar17/spidey-cam",
   },
   {
     title: "SPLERGE table structure recognition",
@@ -343,6 +371,14 @@ export const moreProjects = [
     summary:
       "An asynchronous AWS pipeline that converts text posts to speech. Ingestion is decoupled from synthesis across Lambda functions, with IDs tracked in DynamoDB.",
     stack: ["AWS Lambda", "Polly", "DynamoDB", "S3"],
+  },
+  {
+    title: "GPS tracker for the NUST shuttle",
+    year: "2023",
+    summary:
+      "Bare-metal ATmega32A firmware that parses NMEA from a GPS module, shows position on an LCD and streams it over Bluetooth to an Android map. Team of 3.",
+    stack: ["C++ (AVR)", "ATmega32A", "NMEA", "Bluetooth"],
+    href: "https://github.com/Abubakar17/GPS-INTEGRATION-FOR-SHUTTLE-SERVICE",
   },
 ];
 
@@ -428,8 +464,6 @@ export const research = {
       "30 experiments comparing image-only, text-only and combined selection. The combined strategy led on mAP50, mAP50:95, precision and recall across most rounds. Because selection is driven by text, you can read why each batch was chosen. The dentist review was deliberately quick, so 9.18% is a rough estimate of agent error.",
     stack: ["Qwen2-VL", "ClinicalBERT", "YOLOv11", "PyTorch", "Core-set active learning"],
   },
-  seeking:
-    "I'm looking for a master's thesis internship as an ML or computer vision engineer: perception, 3D vision, or label-efficient learning on real sensor data.",
 };
 
 /* ------------------------------------------------------------------ */
@@ -593,6 +627,7 @@ export const stack = [
       "Segmentation",
       "Point clouds",
       "Active learning",
+      "MediaPipe",
     ],
   },
   {
@@ -609,7 +644,7 @@ export const stack = [
   },
   {
     group: "Robotics & edge",
-    items: ["ROS 2", "Jetson Orin Nano", "ONNX Runtime", "Raspberry Pi", "LiDAR"],
+    items: ["ROS 2", "LeRobot (ACT)", "Jetson Orin Nano", "ONNX Runtime", "Raspberry Pi", "LiDAR"],
   },
   {
     group: "MLOps & cloud",

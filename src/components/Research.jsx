@@ -1,4 +1,4 @@
-import { profile, research } from "../data/content";
+import { research } from "../data/content";
 import { Fact, LinkRow, SectionHead } from "./ui";
 
 function Authors({ authors }) {
@@ -55,16 +55,6 @@ export default function Research() {
           </ol>
         </div>
       </div>
-
-      <aside className="seeking" data-reveal aria-label="Currently seeking">
-        <p>
-          <span className="status-dot" aria-hidden="true" />
-          {research.seeking}
-        </p>
-        <a className="button button-primary" href={`mailto:${profile.email}?subject=Thesis%20internship`}>
-          Get in touch
-        </a>
-      </aside>
     </section>
   );
 }

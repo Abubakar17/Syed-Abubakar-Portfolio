@@ -7,6 +7,15 @@ export default function Hero() {
     <section className="hero" id="top" aria-labelledby="hero-title">
       <div className="hero-grid">
         <div className="hero-copy">
+          <a className="status" href="#contact">
+            <span className="status-dot" aria-hidden="true" />
+            <span className="status-text">
+              <strong>{profile.seeking.headline}</strong>
+              <span>
+                {profile.seeking.role} · {profile.seeking.focus}
+              </span>
+            </span>
+          </a>
           <p className="eyebrow">
             {profile.role} · {profile.location}
           </p>
@@ -29,8 +38,7 @@ export default function Hero() {
             </ul>
           </div>
           <p className="hero-sub">
-            Erasmus Mundus scholar at the University of Genoa, seeking a{" "}
-            <strong>master's thesis internship</strong> in ML / computer vision.
+            Erasmus Mundus scholar, now at the University of Genoa (Computer Engineering).
           </p>
 
           <div className="hero-actions">
